@@ -25,24 +25,27 @@ import java.io.IOException;
 
 public class ColorServiceTest {
 
+    public static Rebrickable REBRICKABLE;
+
     @BeforeAll
     public static void beforeAll() {
         Assumptions.assumeTrue(System.getenv().containsKey("REBRICKABLE_API_KEY"));
+        REBRICKABLE = new Rebrickable(System.getenv("REBRICKABLE_API_KEY"));
     }
 
     @Test
     public void testAll() throws IOException {
-        Assertions.assertNotNull(new Rebrickable(System.getenv("REBRICKABLE_API_KEY")).color().all());
+        Assertions.assertNotNull(REBRICKABLE.color().all());
     }
 
     @Test
     public void testAllPage() throws IOException {
-        Assertions.assertNotNull(new Rebrickable(System.getenv("REBRICKABLE_API_KEY")).color().all(1, 1));
+        Assertions.assertNotNull(REBRICKABLE.color().all(1, 1));
     }
 
     @Test
     public void testGet() throws IOException {
-        Assertions.assertNotNull(new Rebrickable(System.getenv("REBRICKABLE_API_KEY")).color().get(1));
+        Assertions.assertNotNull(REBRICKABLE.color().get(1));
     }
 
 }

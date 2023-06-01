@@ -25,14 +25,17 @@ import java.io.IOException;
 
 public class ElementServiceTest {
 
+    public static Rebrickable REBRICKABLE;
+
     @BeforeAll
     public static void beforeAll() {
         Assumptions.assumeTrue(System.getenv().containsKey("REBRICKABLE_API_KEY"));
+        REBRICKABLE = new Rebrickable(System.getenv("REBRICKABLE_API_KEY"));
     }
 
     @Test
     public void testGet() throws IOException {
-        Assertions.assertNotNull(new Rebrickable(System.getenv("REBRICKABLE_API_KEY")).element().get("4159052"));
+        Assertions.assertNotNull(REBRICKABLE.element().get("4159052"));
     }
 
 }

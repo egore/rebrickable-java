@@ -25,24 +25,27 @@ import java.io.IOException;
 
 public class PartCategoryServiceTest {
 
+    public static Rebrickable REBRICKABLE;
+
     @BeforeAll
     public static void beforeAll() {
         Assumptions.assumeTrue(System.getenv().containsKey("REBRICKABLE_API_KEY"));
+        REBRICKABLE = new Rebrickable(System.getenv("REBRICKABLE_API_KEY"));
     }
 
     @Test
     public void testAll() throws IOException {
-        Assertions.assertNotNull(new Rebrickable(System.getenv("REBRICKABLE_API_KEY")).partCategory().all());
+        Assertions.assertNotNull(REBRICKABLE.partCategory().all());
     }
 
     @Test
     public void testAllPage() throws IOException {
-        Assertions.assertNotNull(new Rebrickable(System.getenv("REBRICKABLE_API_KEY")).partCategory().all(1, 1));
+        Assertions.assertNotNull(REBRICKABLE.partCategory().all(1, 1));
     }
 
     @Test
     public void testGet() throws IOException {
-        Assertions.assertNotNull(new Rebrickable(System.getenv("REBRICKABLE_API_KEY")).partCategory().get(65));
+        Assertions.assertNotNull(REBRICKABLE.partCategory().get(65));
     }
 
 }

@@ -22,45 +22,48 @@ import java.io.IOException;
 
 public class SetServiceTest {
 
+    public static Rebrickable REBRICKABLE;
+
     @BeforeAll
     public static void beforeAll() {
         Assumptions.assumeTrue(System.getenv().containsKey("REBRICKABLE_API_KEY"));
+        REBRICKABLE = new Rebrickable(System.getenv("REBRICKABLE_API_KEY"));
     }
 
     @Test
     @Disabled("Loads to much data")
     public void testAll() throws IOException {
-        Assertions.assertNotNull(new Rebrickable(System.getenv("REBRICKABLE_API_KEY")).set().all());
+        Assertions.assertNotNull(REBRICKABLE.set().all());
     }
 
     @Test
     public void testAllPage() throws IOException {
-        Assertions.assertNotNull(new Rebrickable(System.getenv("REBRICKABLE_API_KEY")).set().all(1, 1));
+        Assertions.assertNotNull(REBRICKABLE.set().all(1, 1));
     }
 
     @Test
     public void testGet() throws IOException {
-        Assertions.assertNotNull(new Rebrickable(System.getenv("REBRICKABLE_API_KEY")).set().get("71236"));
+        Assertions.assertNotNull(REBRICKABLE.set().get("71236"));
     }
 
     @Test
     public void testAlternates() throws IOException {
-        Assertions.assertNotNull(new Rebrickable(System.getenv("REBRICKABLE_API_KEY")).set().alternates("9476-1"));
+        Assertions.assertNotNull(REBRICKABLE.set().alternates("9476-1"));
     }
 
     @Test
     public void testMinifigures() throws IOException {
-        Assertions.assertNotNull(new Rebrickable(System.getenv("REBRICKABLE_API_KEY")).set().minifigures("9476"));
+        Assertions.assertNotNull(REBRICKABLE.set().minifigures("9476"));
     }
 
     @Test
     public void testParts() throws IOException {
-        Assertions.assertNotNull(new Rebrickable(System.getenv("REBRICKABLE_API_KEY")).set().parts("9476"));
+        Assertions.assertNotNull(REBRICKABLE.set().parts("9476"));
     }
 
     @Test
     public void testSets() throws IOException {
-        Assertions.assertNotNull(new Rebrickable(System.getenv("REBRICKABLE_API_KEY")).set().sets("9476"));
+        Assertions.assertNotNull(REBRICKABLE.set().sets("9476"));
     }
 
 }
