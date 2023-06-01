@@ -22,8 +22,8 @@ and will provide necessary API wrappers.
 This project covers the "lego" API, but not (yet?) the "users" API. Adding the missing part is not
 complex, but currently beyond my personal need. Feel free to implement it and send a merge request.
 
-Error handling of any HTTP status code other than 200 is missing. Most of it can be added in the
-`AbstractService` class.
+Basic error handling of HTTP status codes 4xx is implemented in `AbstractService` class. Additional
+work is needed when adding other requests than GET for the "users" API.
 
 ## Development
 

@@ -17,6 +17,10 @@
 package com.rebrickable;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.rebrickable.exceptions.InvalidAPIKeyException;
+import com.rebrickable.exceptions.NotFoundException;
+import com.rebrickable.exceptions.RebrickableException;
+import com.rebrickable.exceptions.RequestThrottledException;
 import com.rebrickable.responses.PagedResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -75,6 +79,19 @@ abstract class AbstractService {
                     url = response.next;
                 }
 
+            } else if (responseCode == 400) {
+                throw new RebrickableException("An unknown error occured during your request");
+            } else if (responseCode == 401) {
+                throw new InvalidAPIKeyException("You provided an invalid API key. Please check validity at rebrickable.com");
+            } else if (responseCode == 404) {
+                throw new NotFoundException("The object you requested was not found. Please check if the provided identifier is valid");
+            } else if (responseCode == 429) {
+                try (InputStream inputStream = connection.getInputStream()) {
+                    var response = mapper.readValue(inputStream, RequestThrottledException.Response.class);
+                    throw new RequestThrottledException(response.detail);
+                }
+            } else {
+                LOG.warn("Unexpected status code {}", responseCode);
             }
 
         }
@@ -104,7 +121,19 @@ abstract class AbstractService {
 
                 return response.results;
             }
-
+        } else if (responseCode == 400) {
+            throw new RebrickableException("An unknown error occured during your request");
+        } else if (responseCode == 401) {
+            throw new InvalidAPIKeyException("You provided an invalid API key. Please check validity at rebrickable.com");
+        } else if (responseCode == 404) {
+            throw new NotFoundException("The object you requested was not found. Please check if the provided identifier is valid");
+        } else if (responseCode == 429) {
+            try (InputStream inputStream = connection.getInputStream()) {
+                var response = mapper.readValue(inputStream, RequestThrottledException.Response.class);
+                throw new RequestThrottledException(response.detail);
+            }
+        } else {
+            LOG.warn("Unexpected status code {}", responseCode);
         }
 
         return null;
@@ -120,6 +149,19 @@ abstract class AbstractService {
             try (InputStream inputStream = connection.getInputStream()) {
                 return mapper.readValue(inputStream, responseClass);
             }
+        } else if (responseCode == 400) {
+            throw new RebrickableException("An unknown error occured during your request");
+        } else if (responseCode == 401) {
+            throw new InvalidAPIKeyException("You provided an invalid API key. Please check validity at rebrickable.com");
+        } else if (responseCode == 404) {
+            throw new NotFoundException("The object you requested was not found. Please check if the provided identifier is valid");
+        } else if (responseCode == 429) {
+            try (InputStream inputStream = connection.getInputStream()) {
+                var response = mapper.readValue(inputStream, RequestThrottledException.Response.class);
+                throw new RequestThrottledException(response.detail);
+            }
+        } else {
+            LOG.warn("Unexpected status code {}", responseCode);
         }
 
         return null;
