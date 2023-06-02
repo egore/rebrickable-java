@@ -20,8 +20,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.rebrickable.lego.LegoService;
+import com.rebrickable.users.UsersService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
 
 /**
  * Java implementation of the Rebrickable V3 API.
@@ -61,6 +64,10 @@ public class Rebrickable {
 
     public LegoService lego() {
         return new LegoService(apiKey, mapper, baseUrl);
+    }
+
+    public UsersService users(String username, String password) throws IOException {
+        return new UsersService(apiKey, mapper, baseUrl, username, password);
     }
 
 }

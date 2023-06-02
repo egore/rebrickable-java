@@ -19,11 +19,12 @@ and will provide necessary API wrappers.
 
 ## Status
 
-This project covers the "lego" API, but not (yet?) the "users" API. Adding the missing part is not
-complex, but currently beyond my personal need. Feel free to implement it and send a merge request.
+This project covers all of the "lego" API, but only minimal parts of the "users" API. Adding the
+missing part is not complex, but currently beyond my personal need. Feel free to implement it and
+send a merge request.
 
 Basic error handling of HTTP status codes 4xx is implemented in `AbstractService` class. Additional
-work is needed when adding other requests than GET for the "users" API.
+work is needed when adding POST/DELETE requests of the "users" API.
 
 ## Development
 

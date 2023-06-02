@@ -82,6 +82,11 @@ public abstract class AbstractService {
                 throw new RebrickableException("An unknown error occured during your request");
             } else if (responseCode == 401) {
                 throw new InvalidAPIKeyException("You provided an invalid API key. Please check validity at rebrickable.com");
+            } else if (responseCode == 403) {
+                try (InputStream inputStream = connection.getInputStream()) {
+                    var response = mapper.readValue(inputStream, ExceptionResponse.class);
+                    throw new InvalidCredentialsException(response.detail);
+                }
             } else if (responseCode == 404) {
                 throw new NotFoundException("The object you requested was not found. Please check if the provided identifier is valid");
             } else if (responseCode == 429) {
@@ -124,6 +129,11 @@ public abstract class AbstractService {
             throw new RebrickableException("An unknown error occured during your request");
         } else if (responseCode == 401) {
             throw new InvalidAPIKeyException("You provided an invalid API key. Please check validity at rebrickable.com");
+        } else if (responseCode == 403) {
+            try (InputStream inputStream = connection.getInputStream()) {
+                var response = mapper.readValue(inputStream, ExceptionResponse.class);
+                throw new InvalidCredentialsException(response.detail);
+            }
         } else if (responseCode == 404) {
             throw new NotFoundException("The object you requested was not found. Please check if the provided identifier is valid");
         } else if (responseCode == 429) {
@@ -152,6 +162,11 @@ public abstract class AbstractService {
             throw new RebrickableException("An unknown error occured during your request");
         } else if (responseCode == 401) {
             throw new InvalidAPIKeyException("You provided an invalid API key. Please check validity at rebrickable.com");
+        } else if (responseCode == 403) {
+            try (InputStream inputStream = connection.getInputStream()) {
+                var response = mapper.readValue(inputStream, ExceptionResponse.class);
+                throw new InvalidCredentialsException(response.detail);
+            }
         } else if (responseCode == 404) {
             throw new NotFoundException("The object you requested was not found. Please check if the provided identifier is valid");
         } else if (responseCode == 429) {
