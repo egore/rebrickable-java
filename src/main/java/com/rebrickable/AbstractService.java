@@ -17,11 +17,10 @@
 package com.rebrickable;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rebrickable.exceptions.InvalidAPIKeyException;
-import com.rebrickable.exceptions.NotFoundException;
 import com.rebrickable.exceptions.RebrickableException;
-import com.rebrickable.exceptions.RequestThrottledException;
+import com.rebrickable.lego.exceptions.*;
 import com.rebrickable.responses.PagedResponse;
+import com.rebrickable.users.exceptions.InvalidCredentialsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +31,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-abstract class AbstractService {
+public abstract class AbstractService {
 
     private static final Logger LOG = LoggerFactory.getLogger(AbstractService.class);
 
@@ -87,7 +86,7 @@ abstract class AbstractService {
                 throw new NotFoundException("The object you requested was not found. Please check if the provided identifier is valid");
             } else if (responseCode == 429) {
                 try (InputStream inputStream = connection.getInputStream()) {
-                    var response = mapper.readValue(inputStream, RequestThrottledException.Response.class);
+                    var response = mapper.readValue(inputStream, ExceptionResponse.class);
                     throw new RequestThrottledException(response.detail);
                 }
             } else {
@@ -129,7 +128,7 @@ abstract class AbstractService {
             throw new NotFoundException("The object you requested was not found. Please check if the provided identifier is valid");
         } else if (responseCode == 429) {
             try (InputStream inputStream = connection.getInputStream()) {
-                var response = mapper.readValue(inputStream, RequestThrottledException.Response.class);
+                var response = mapper.readValue(inputStream, ExceptionResponse.class);
                 throw new RequestThrottledException(response.detail);
             }
         } else {
@@ -157,7 +156,7 @@ abstract class AbstractService {
             throw new NotFoundException("The object you requested was not found. Please check if the provided identifier is valid");
         } else if (responseCode == 429) {
             try (InputStream inputStream = connection.getInputStream()) {
-                var response = mapper.readValue(inputStream, RequestThrottledException.Response.class);
+                var response = mapper.readValue(inputStream, ExceptionResponse.class);
                 throw new RequestThrottledException(response.detail);
             }
         } else {

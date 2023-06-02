@@ -12,7 +12,7 @@ The main entry point to the library is `com.rebrickable.Rebrickable`. It needs a
 and will provide necessary API wrappers.
 
     var api = new Rebrickable("your-api-key");
-    List<Color> colors = api.color().all();
+    List<Color> colors = api.lego().color().all();
 
     var color = colors.get(0);
     System.out.println("The first color is " + color.name + " and has an RGB value of " + color.rgb);

@@ -19,6 +19,7 @@ package com.rebrickable;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.rebrickable.lego.LegoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,32 +59,8 @@ public class Rebrickable {
         LOG.debug("Create rebrickable instance for URL {}", this.baseUrl);
     }
 
-    public ColorService color() {
-        return new ColorService(apiKey, mapper, baseUrl);
-    }
-
-    public ElementService element() {
-        return new ElementService(apiKey, mapper, baseUrl);
-    }
-
-    public MinifigureService minifigure() {
-        return new MinifigureService(apiKey, mapper, baseUrl);
-    }
-
-    public PartCategoryService partCategory() {
-        return new PartCategoryService(apiKey, mapper, baseUrl);
-    }
-
-    public SetService set() {
-        return new SetService(apiKey, mapper, baseUrl);
-    }
-
-    public ThemeService theme() {
-        return new ThemeService(apiKey, mapper, baseUrl);
-    }
-
-    public PartService part() {
-        return new PartService(apiKey, mapper, baseUrl);
+    public LegoService lego() {
+        return new LegoService(apiKey, mapper, baseUrl);
     }
 
 }
