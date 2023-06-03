@@ -120,9 +120,12 @@ public abstract class AbstractService {
         }
         url += "page={page}&page_size={page_size}".replace("{page}", Integer.toString(page).replace("{page_size}", Integer.toString(pageSize)));
 
+
+        url = baseUrl + url;
+
         // Load the data
         LOG.debug("Getting page from {}", url);
-        HttpsURLConnection connection = (HttpsURLConnection) new URL(baseUrl + url).openConnection();
+        HttpsURLConnection connection = (HttpsURLConnection) new URL(url).openConnection();
         connection.addRequestProperty("Authorization", "key " + apiKey);
         int responseCode = connection.getResponseCode();
 
@@ -141,8 +144,12 @@ public abstract class AbstractService {
     }
 
     protected <T> T getSingle(String url, Class<T> responseClass) throws IOException {
+
+        url = baseUrl + url;
+
         // Load the data
-        HttpsURLConnection connection = (HttpsURLConnection) new URL(baseUrl + url).openConnection();
+        LOG.debug("Getting data from {}", url);
+        HttpsURLConnection connection = (HttpsURLConnection) new URL(url).openConnection();
         connection.addRequestProperty("Authorization", "key " + apiKey);
         int responseCode = connection.getResponseCode();
 
