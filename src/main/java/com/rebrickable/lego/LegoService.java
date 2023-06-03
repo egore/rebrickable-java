@@ -1,17 +1,12 @@
 package com.rebrickable.lego;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.rebrickable.AbstractService;
 
-public class LegoService {
-
-    private final String apiKey;
-    private final ObjectMapper mapper;
-    private final String baseUrl;
+public class LegoService extends AbstractService {
 
     public LegoService(String apiKey, ObjectMapper mapper, String baseUrl) {
-        this.apiKey = apiKey;
-        this.mapper = mapper;
-        this.baseUrl = baseUrl;
+        super(apiKey, mapper, baseUrl);
     }
 
     public ColorService color() {

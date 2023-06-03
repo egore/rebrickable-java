@@ -21,23 +21,28 @@ import com.rebrickable.exceptions.RebrickableException;
 import com.rebrickable.lego.exceptions.*;
 import com.rebrickable.responses.PagedResponse;
 import com.rebrickable.users.exceptions.InvalidCredentialsException;
+import com.rebrickable.users.model.Token;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.net.ssl.HttpsURLConnection;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public abstract class AbstractService {
 
     private static final Logger LOG = LoggerFactory.getLogger(AbstractService.class);
 
-    private final String apiKey;
-    private final ObjectMapper mapper;
-    private final String baseUrl;
+    protected final String apiKey;
+    protected final ObjectMapper mapper;
+    protected final String baseUrl;
 
     protected AbstractService(String apiKey, ObjectMapper mapper, String baseUrl) {
         this.apiKey = apiKey;
@@ -161,6 +166,43 @@ public abstract class AbstractService {
             handleError(connection, responseCode);
         }
 
+        return null;
+    }
+
+    protected <T> T post(String url, Class<T> responseClass, Map<String, String> data) throws IOException {
+
+        url = baseUrl + url;
+
+        LOG.debug("Posting data to {}", url);
+        HttpsURLConnection connection = (HttpsURLConnection) new URL(url).openConnection();
+        connection.setDoOutput(true);
+        connection.setRequestMethod("POST");
+        connection.addRequestProperty("Authorization", "key " + apiKey);
+        connection.addRequestProperty("Accept", "application/json");
+        connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+
+        try (var writer = new DataOutputStream(connection.getOutputStream())) {
+            boolean first = true;
+            for (var entry : data.entrySet()) {
+                if (!first) {
+                    writer.writeBytes("&");
+                }
+                writer.writeBytes(entry.getKey());
+                writer.writeBytes("=");
+                writer.writeBytes(URLEncoder.encode(entry.getValue(), StandardCharsets.UTF_8));
+                first = false;
+            }
+        }
+
+        int responseCode = connection.getResponseCode();
+
+        if (responseCode == 200) {
+            try (InputStream inputStream = connection.getInputStream()) {
+                return mapper.readValue(inputStream, responseClass);
+            }
+        } else {
+            handleError(connection, responseCode);
+        }
         return null;
     }
 
