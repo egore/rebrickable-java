@@ -21,7 +21,6 @@ import com.rebrickable.exceptions.RebrickableException;
 import com.rebrickable.lego.exceptions.*;
 import com.rebrickable.responses.PagedResponse;
 import com.rebrickable.users.exceptions.InvalidCredentialsException;
-import com.rebrickable.users.model.Token;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -170,13 +169,25 @@ public abstract class AbstractService {
     }
 
     protected <T> T post(String url, Class<T> responseClass, Map<String, String> data) throws IOException {
+        return upload("POST", url, responseClass, data);
+    }
+
+    protected <T> T patch(String url, Class<T> responseClass, Map<String, String> data) throws IOException {
+        return upload("PATCH", url, responseClass, data);
+    }
+
+    protected <T> T put(String url, Class<T> responseClass, Map<String, String> data) throws IOException {
+        return upload("PUT", url, responseClass, data);
+    }
+
+    private <T> T upload(String method, String url, Class<T> responseClass, Map<String, String> data) throws IOException {
 
         url = baseUrl + url;
 
         LOG.debug("Posting data to {}", url);
         HttpsURLConnection connection = (HttpsURLConnection) new URL(url).openConnection();
         connection.setDoOutput(true);
-        connection.setRequestMethod("POST");
+        connection.setRequestMethod(method);
         connection.addRequestProperty("Authorization", "key " + apiKey);
         connection.addRequestProperty("Accept", "application/json");
         connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
@@ -204,6 +215,25 @@ public abstract class AbstractService {
             handleError(connection, responseCode);
         }
         return null;
+    }
+
+    protected void delete(String url) throws IOException {
+
+        url = baseUrl + url;
+
+        LOG.debug("Deleting data at {}", url);
+        HttpsURLConnection connection = (HttpsURLConnection) new URL(url).openConnection();
+        connection.setRequestMethod("DELETE");
+        connection.addRequestProperty("Authorization", "key " + apiKey);
+        connection.addRequestProperty("Accept", "application/json");
+
+        int responseCode = connection.getResponseCode();
+
+        if (responseCode == 204) {
+            return;
+        } else {
+            handleError(connection, responseCode);
+        }
     }
 
 }
