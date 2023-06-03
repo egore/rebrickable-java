@@ -1,9 +1,7 @@
 package com.rebrickable.users;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rebrickable.AbstractService;
 import com.rebrickable.exceptions.RebrickableException;
-import com.rebrickable.users.MinifigureService;
 import com.rebrickable.lego.exceptions.*;
 import com.rebrickable.users.exceptions.InvalidCredentialsException;
 import com.rebrickable.users.model.Token;
@@ -17,7 +15,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.Map;
 
 public class UsersService {
 
@@ -82,6 +79,10 @@ public class UsersService {
 
     public MinifigureService minifigure() {
         return new MinifigureService(apiKey, mapper, baseUrl, userToken);
+    }
+
+    public PartlistsService partlists() {
+        return new PartlistsService(apiKey, mapper, baseUrl, userToken);
     }
 
 }
