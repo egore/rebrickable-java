@@ -44,29 +44,29 @@ public class PartlistsService extends AbstractUserService {
     }
 
     public Partlist create(Partlist partlist) throws IOException {
-        Map<String, String> data = toMap(partlist);
+        var data = toMap(partlist);
         return post("/users/{user_token}/partlists/".replace("{user_token}", userToken), Partlist.class, data);
     }
 
     public void delete(int listId) throws IOException {
-        delete("/users/{user_token}/partlists/{list_id}/parts/".replace("{user_token}", userToken).replace("{list_id}", Integer.toString(listId)));
+        delete("/users/{user_token}/partlists/{list_id}/".replace("{user_token}", userToken).replace("{list_id}", Integer.toString(listId)));
     }
 
     public Partlist update(Partlist partlist) throws IOException {
-        Map<String, String> data = toMap(partlist);
-        return put("/users/{user_token}/partlists/{list_id}/parts/".replace("{user_token}", userToken).replace("{list_id}", Integer.toString(partlist.id)), Partlist.class, data);
+        var data = toMap(partlist);
+        return patch("/users/{user_token}/partlists/{list_id}/".replace("{user_token}", userToken).replace("{list_id}", Integer.toString(partlist.id)), Partlist.class, data);
     }
 
     public Partlist replace(Partlist partlist) throws IOException {
-        Map<String, String> data = toMap(partlist);
-        return put("/users/{user_token}/partlists/{list_id}/parts/".replace("{user_token}", userToken).replace("{list_id}", Integer.toString(partlist.id)), Partlist.class, data);
+        var data = toMap(partlist);
+        return put("/users/{user_token}/partlists/{list_id}/".replace("{user_token}", userToken).replace("{list_id}", Integer.toString(partlist.id)), Partlist.class, data);
     }
 
-    private static Map<String, String> toMap(Partlist partlist) {
-        Map<String, String> data = new HashMap<>();
-        data.put("is_buildable", Boolean.toString(partlist.buildable));
+    private static Map<String, Object> toMap(Partlist partlist) {
+        Map<String, Object> data = new HashMap<>();
+        data.put("is_buildable", partlist.buildable);
         data.put("name", partlist.name);
-        data.put("num_parts", Integer.toString(partlist.numParts));
+        data.put("num_parts", partlist.numParts);
         return data;
     }
 

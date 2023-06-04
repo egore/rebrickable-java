@@ -10,4 +10,8 @@ public class RebrickableException extends RuntimeException {
         super(message, cause);
     }
 
+    public RebrickableException(Throwable cause) {
+        super(cause);
+    }
+
 }
