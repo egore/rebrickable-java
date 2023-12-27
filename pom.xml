@@ -21,7 +21,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>3.12.1</version>
                 <configuration>
                     <compilerArgs>
                         <arg>-parameters</arg>
@@ -30,7 +30,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.2.3</version>
             </plugin>
         </plugins>
     </build>
