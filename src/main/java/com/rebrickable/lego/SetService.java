@@ -35,11 +35,11 @@ public class SetService extends AbstractService {
     }
 
     public List<Set> all() throws IOException {
-        return getPaged("/lego/sets/", SetResponse.class);
+        return getAllInPages("/lego/sets/", SetResponse.class);
     }
 
-    public List<Set> all(int page, int pageSize) throws IOException {
-        return getPaged("/lego/sets/", SetResponse.class, page, pageSize);
+    public List<Set> page(int page, int pageSize) throws IOException {
+        return getPage("/lego/sets/", SetResponse.class, page, pageSize);
     }
 
     public Set get(String setNum) throws IOException {
@@ -47,19 +47,19 @@ public class SetService extends AbstractService {
     }
 
     public List<Set> alternates(String setNum) throws IOException {
-        return getPaged("/lego/sets/{set_num}/alternates/".replace("{set_num}", fixup(setNum)), SetResponse.class);
+        return getAllInPages("/lego/sets/{set_num}/alternates/".replace("{set_num}", fixup(setNum)), SetResponse.class);
     }
 
     public List<SetMinifigure> minifigures(String setNum) throws IOException {
-        return getPaged("/lego/sets/{set_num}/minifigs/".replace("{set_num}", fixup(setNum)), SetMinifigureResponse.class);
+        return getAllInPages("/lego/sets/{set_num}/minifigs/".replace("{set_num}", fixup(setNum)), SetMinifigureResponse.class);
     }
 
     public List<SetPart> parts(String setNum) throws IOException {
-        return getPaged("/lego/sets/{set_num}/parts/".replace("{set_num}", fixup(setNum)), SetPartsResponse.class);
+        return getAllInPages("/lego/sets/{set_num}/parts/".replace("{set_num}", fixup(setNum)), SetPartsResponse.class);
     }
 
     public List<Set> sets(String setNum) throws IOException {
-        return getPaged("/lego/sets/{set_num}/sets/".replace("{set_num}", fixup(setNum)), SetResponse.class);
+        return getAllInPages("/lego/sets/{set_num}/sets/".replace("{set_num}", fixup(setNum)), SetResponse.class);
     }
 
     /**

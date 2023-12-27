@@ -35,11 +35,11 @@ public class MinifigureService extends AbstractService {
     }
 
     public List<Minifigure> all() throws IOException {
-        return getPaged("/lego/minifigs/", MinifigureResponse.class);
+        return getAllInPages("/lego/minifigs/", MinifigureResponse.class);
     }
 
-    public List<Minifigure> all(int page, int pageSize) throws IOException {
-        return getPaged("/lego/minifigs/", MinifigureResponse.class, page, pageSize);
+    public List<Minifigure> page(int page, int pageSize) throws IOException {
+        return getPage("/lego/minifigs/", MinifigureResponse.class, page, pageSize);
     }
 
     public Minifigure get(String setNum) throws IOException {
@@ -47,11 +47,11 @@ public class MinifigureService extends AbstractService {
     }
 
     public List<SetPart> parts(String setNum) throws IOException {
-        return getPaged("/lego/minifigs/{set_num}/parts/".replace("{set_num}", setNum), SetPartsResponse.class);
+        return getAllInPages("/lego/minifigs/{set_num}/parts/".replace("{set_num}", setNum), SetPartsResponse.class);
     }
 
     public List<Set> sets(String setNum) throws IOException {
-        return getPaged("/lego/minifigs/{set_num}/sets/".replace("{set_num}", setNum), SetResponse.class);
+        return getAllInPages("/lego/minifigs/{set_num}/sets/".replace("{set_num}", setNum), SetResponse.class);
     }
 
 }

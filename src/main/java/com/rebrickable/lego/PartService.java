@@ -36,11 +36,11 @@ public class PartService extends AbstractService {
     }
 
     public List<Part> all() throws IOException {
-        return getPaged("/lego/parts/", PartResponse.class);
+        return getAllInPages("/lego/parts/", PartResponse.class);
     }
 
-    public List<Part> all(int page, int pageSize) throws IOException {
-        return getPaged("/lego/parts/", PartResponse.class, page, pageSize);
+    public List<Part> page(int page, int pageSize) throws IOException {
+        return getPage("/lego/parts/", PartResponse.class, page, pageSize);
     }
 
     public Part get(String partNum) throws IOException {
@@ -48,7 +48,7 @@ public class PartService extends AbstractService {
     }
 
     public List<PartColor> colors(String partNum) throws IOException {
-        return getPaged("/lego/parts/{part_num}/colors/".replace("{part_num}", partNum), PartColorResponse.class);
+        return getAllInPages("/lego/parts/{part_num}/colors/".replace("{part_num}", partNum), PartColorResponse.class);
     }
 
     public PartColor2 color(String partNum, int colorId) throws IOException {
@@ -56,6 +56,6 @@ public class PartService extends AbstractService {
     }
 
     public List<Set> colorSet(String partNum, int colorId) throws IOException {
-        return getPaged("/lego/parts/{part_num}/colors/{color_id}/sets/".replace("{part_num}", partNum).replace("{color_id}", Integer.toString(colorId)), SetResponse.class);
+        return getAllInPages("/lego/parts/{part_num}/colors/{color_id}/sets/".replace("{part_num}", partNum).replace("{color_id}", Integer.toString(colorId)), SetResponse.class);
     }
 }

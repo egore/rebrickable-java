@@ -31,15 +31,15 @@ public class ColorService extends AbstractService {
     }
 
     public List<Color> all() throws IOException {
-        return getPaged("/lego/colors/", ColorResponse.class);
+        return getAllInPages("/lego/colors/", ColorResponse.class);
     }
 
     /**
      * @param page page to load (starts at 1)
      * @param pageSize number of entries per page (pass 0 to use default)
      */
-    public List<Color> all(int page, int pageSize) throws IOException {
-        return getPaged("/lego/colors/", ColorResponse.class, page, pageSize);
+    public List<Color> page(int page, int pageSize) throws IOException {
+        return getPage("/lego/colors/", ColorResponse.class, page, pageSize);
     }
 
     /**

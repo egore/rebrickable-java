@@ -30,7 +30,7 @@ public class MinifigureService extends AbstractUserService {
     }
 
     public List<Minifigure> all() throws IOException {
-        return getPaged("/users/{user_token}/minifigs/".replace("{user_token}", userToken), MinifigureResponse.class);
+        return getAllInPages("/users/{user_token}/minifigs/".replace("{user_token}", userToken), MinifigureResponse.class);
     }
 
 }

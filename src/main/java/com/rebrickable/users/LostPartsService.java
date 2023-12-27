@@ -15,7 +15,7 @@ public class LostPartsService extends AbstractUserService {
     }
 
     public List<LostPart> all() throws IOException {
-        return getPaged("/users/{user_token}/lost_parts/".replace("{user_token}", userToken), LostPartsResponse.class);
+        return getAllInPages("/users/{user_token}/lost_parts/".replace("{user_token}", userToken), LostPartsResponse.class);
     }
 
     public LostPart add(int partId, int quantity) throws IOException {

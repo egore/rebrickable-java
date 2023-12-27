@@ -31,11 +31,11 @@ public class PartCategoryService extends AbstractService {
     }
 
     public List<PartCategory> all() throws IOException {
-        return getPaged("/lego/part_categories/", PartCategoryResponse.class);
+        return getAllInPages("/lego/part_categories/", PartCategoryResponse.class);
     }
 
-    public List<PartCategory> all(int page, int pageSize) throws IOException {
-        return getPaged("/lego/part_categories/", PartCategoryResponse.class, page, pageSize);
+    public List<PartCategory> page(int page, int pageSize) throws IOException {
+        return getPage("/lego/part_categories/", PartCategoryResponse.class, page, pageSize);
     }
 
     public PartCategory get(int id) throws IOException{

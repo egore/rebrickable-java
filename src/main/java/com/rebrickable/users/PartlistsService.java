@@ -32,7 +32,7 @@ public class PartlistsService extends AbstractUserService {
     }
 
     public List<Partlist> all() throws IOException {
-        return getPaged("/users/{user_token}/partlists/".replace("{user_token}", userToken), PartlistsResponse.class);
+        return getAllInPages("/users/{user_token}/partlists/".replace("{user_token}", userToken), PartlistsResponse.class);
     }
 
     public Partlist get(int listId) throws IOException {
@@ -40,7 +40,7 @@ public class PartlistsService extends AbstractUserService {
     }
 
     public List<Partlist> parts(int listId) throws IOException {
-        return getPaged("/users/{user_token}/partlists/{list_id}/parts/".replace("{user_token}", userToken).replace("{list_id}", Integer.toString(listId)), PartlistsResponse.class);
+        return getAllInPages("/users/{user_token}/partlists/{list_id}/parts/".replace("{user_token}", userToken).replace("{list_id}", Integer.toString(listId)), PartlistsResponse.class);
     }
 
     public Partlist create(Partlist partlist) throws IOException {

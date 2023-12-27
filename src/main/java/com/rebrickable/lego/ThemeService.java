@@ -31,11 +31,11 @@ public class ThemeService extends AbstractService {
     }
 
     public List<Theme> all() throws IOException {
-        return getPaged("/lego/themes/", ThemeResponse.class);
+        return getAllInPages("/lego/themes/", ThemeResponse.class);
     }
 
-    public List<Theme> all(int page, int pageSize) throws IOException {
-        return getPaged("/lego/themes/", ThemeResponse.class, page, pageSize);
+    public List<Theme> page(int page, int pageSize) throws IOException {
+        return getPage("/lego/themes/", ThemeResponse.class, page, pageSize);
     }
 
     public Theme get(int id) throws IOException {

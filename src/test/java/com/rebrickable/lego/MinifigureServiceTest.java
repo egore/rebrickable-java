@@ -40,7 +40,7 @@ public class MinifigureServiceTest extends AbstractLegoServiceTest {
 
     @Test
     public void testAllPage() throws IOException {
-        Assertions.assertNotNull(SERVICE.all(1, 1));
+        Assertions.assertNotNull(SERVICE.page(1, 1));
     }
 
     @Test
