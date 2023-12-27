@@ -24,14 +24,15 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-public class ThemeServiceTest {
+public class ThemeServiceTest extends AbstractLegoServiceTest {
 
     private static ThemeService SERVICE;
 
     @BeforeAll
-    public static void beforeAll() {
-        Assumptions.assumeTrue(System.getenv().containsKey("REBRICKABLE_API_KEY"));
-        SERVICE = new Rebrickable(System.getenv("REBRICKABLE_API_KEY")).lego().theme();
+    public static void initService() {
+        SERVICE = new Rebrickable(System.getenv("REBRICKABLE_API_KEY"))
+                .lego()
+                .theme();
     }
 
     @Test

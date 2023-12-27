@@ -24,16 +24,15 @@ import org.junit.jupiter.api.*;
 import java.io.IOException;
 import java.util.UUID;
 
-public class PartlistsServiceTest {
+public class PartlistsServiceTest extends AbstractUsersServiceTest {
 
     private static PartlistsService SERVICE;
 
     @BeforeAll
-    public static void beforeAll() throws IOException {
-        Assumptions.assumeTrue(System.getenv().containsKey("REBRICKABLE_API_KEY"));
-        Assumptions.assumeTrue(System.getenv().containsKey("REBRICKABLE_USERNAME"));
-        Assumptions.assumeTrue(System.getenv().containsKey("REBRICKABLE_PASSWORD"));
-        SERVICE = new Rebrickable(System.getenv("REBRICKABLE_API_KEY")).users(System.getenv("REBRICKABLE_USERNAME"), System.getenv("REBRICKABLE_PASSWORD")).partlists();
+    public static void initService() throws IOException {
+        SERVICE = new Rebrickable(System.getenv("REBRICKABLE_API_KEY"))
+                .users(System.getenv("REBRICKABLE_USERNAME"), System.getenv("REBRICKABLE_PASSWORD"))
+                .partlists();
     }
 
     @Test

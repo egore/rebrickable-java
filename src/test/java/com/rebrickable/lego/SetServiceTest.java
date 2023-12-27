@@ -21,14 +21,15 @@ import org.junit.jupiter.api.*;
 
 import java.io.IOException;
 
-public class SetServiceTest {
+public class SetServiceTest extends AbstractLegoServiceTest {
 
     private static SetService SERVICE;
 
     @BeforeAll
-    public static void beforeAll() {
-        Assumptions.assumeTrue(System.getenv().containsKey("REBRICKABLE_API_KEY"));
-        SERVICE = new Rebrickable(System.getenv("REBRICKABLE_API_KEY")).lego().set();
+    public static void initService() {
+        SERVICE = new Rebrickable(System.getenv("REBRICKABLE_API_KEY"))
+                .lego()
+                .set();
     }
 
     @Test
