@@ -64,4 +64,11 @@ public class UsersService extends AbstractService  {
         return new PartlistsService(apiKey, mapper, baseUrl, userToken);
     }
 
+    public SetlistsService setlists() {
+        return new SetlistsService(apiKey, mapper, baseUrl, userToken);
+    }
+
+    public SetsService sets() {
+        return new SetsService(apiKey, mapper, baseUrl, userToken);
+    }
 }
