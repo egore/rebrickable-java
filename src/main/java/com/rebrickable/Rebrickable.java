@@ -21,10 +21,13 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.rebrickable.lego.LegoService;
 import com.rebrickable.users.UsersService;
+import com.rebrickable.util.SimpleCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Java implementation of the Rebrickable V3 API.
@@ -36,6 +39,7 @@ public class Rebrickable {
 
     private final String apiKey;
     private final String baseUrl;
+    private final SimpleCache<UsersService> userServiceCache = new SimpleCache<>();
 
     private final ObjectMapper mapper = JsonMapper.builder()
             .addModule(new JavaTimeModule())
@@ -67,7 +71,13 @@ public class Rebrickable {
     }
 
     public UsersService users(String username, String password) throws IOException {
-        return new UsersService(apiKey, mapper, baseUrl, username, password);
+        String key = username + password;
+        UsersService usersService = userServiceCache.get(key);
+        if (usersService == null) {
+            usersService = new UsersService(apiKey, mapper, baseUrl, username, password);
+            userServiceCache.put(key, usersService);
+        }
+        return usersService;
     }
 
 }
