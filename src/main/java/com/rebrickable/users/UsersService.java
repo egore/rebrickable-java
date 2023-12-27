@@ -52,6 +52,10 @@ public class UsersService extends AbstractService  {
         }
     }
 
+    public LostPartsService lostParts() {
+        return new LostPartsService(apiKey, mapper, baseUrl, userToken);
+    }
+
     public MinifigureService minifigure() {
         return new MinifigureService(apiKey, mapper, baseUrl, userToken);
     }
