@@ -17,9 +17,12 @@
 package com.rebrickable.users;
 
 import com.rebrickable.Rebrickable;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class MinifigureServiceTest extends AbstractUsersServiceTest {
 
@@ -34,7 +37,7 @@ public class MinifigureServiceTest extends AbstractUsersServiceTest {
 
     @Test
     public void testAll() throws IOException {
-        Assertions.assertNotNull(SERVICE.all());
+        assertThat(SERVICE.all()).isNotNull();
     }
 
 }

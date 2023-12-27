@@ -17,12 +17,12 @@
 package com.rebrickable.lego;
 
 import com.rebrickable.Rebrickable;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ThemeServiceTest extends AbstractLegoServiceTest {
 
@@ -37,17 +37,17 @@ public class ThemeServiceTest extends AbstractLegoServiceTest {
 
     @Test
     public void testAll() throws IOException {
-        Assertions.assertNotNull(SERVICE.all());
+        assertThat(SERVICE.all()).isNotNull();
     }
 
     @Test
     public void testAllPage() throws IOException {
-        Assertions.assertNotNull(SERVICE.page(1, 1));
+        assertThat(SERVICE.page(1, 1)).isNotNull();
     }
 
     @Test
     public void testGet() throws IOException {
-        Assertions.assertNotNull(SERVICE.get(604));
+        assertThat(SERVICE.get(604)).isNotNull();
     }
 
 }

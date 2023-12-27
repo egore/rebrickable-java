@@ -17,9 +17,13 @@
 package com.rebrickable.lego;
 
 import com.rebrickable.Rebrickable;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SetServiceTest extends AbstractLegoServiceTest {
 
@@ -35,37 +39,37 @@ public class SetServiceTest extends AbstractLegoServiceTest {
     @Test
     @Disabled("Loads to much data")
     public void testAll() throws IOException {
-        Assertions.assertNotNull(SERVICE.all());
+        assertThat(SERVICE.all()).isNotNull();
     }
 
     @Test
     public void testAllPage() throws IOException {
-        Assertions.assertNotNull(SERVICE.page(1, 1));
+        assertThat(SERVICE.page(1, 1)).isNotNull();
     }
 
     @Test
     public void testGet() throws IOException {
-        Assertions.assertNotNull(SERVICE.get("71236"));
+        assertThat(SERVICE.get("71236")).isNotNull();
     }
 
     @Test
     public void testAlternates() throws IOException {
-        Assertions.assertNotNull(SERVICE.alternates("9476-1"));
+        assertThat(SERVICE.alternates("9476-1")).isNotNull();
     }
 
     @Test
     public void testMinifigures() throws IOException {
-        Assertions.assertNotNull(SERVICE.minifigures("9476"));
+        assertThat(SERVICE.minifigures("9476")).isNotNull();
     }
 
     @Test
     public void testParts() throws IOException {
-        Assertions.assertNotNull(SERVICE.parts("9476"));
+        assertThat(SERVICE.parts("9476")).isNotNull();
     }
 
     @Test
     public void testSets() throws IOException {
-        Assertions.assertNotNull(SERVICE.sets("9476"));
+        assertThat(SERVICE.sets("9476")).isNotNull();
     }
 
 }

@@ -17,9 +17,13 @@
 package com.rebrickable.lego;
 
 import com.rebrickable.Rebrickable;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class MinifigureServiceTest extends AbstractLegoServiceTest {
 
@@ -35,27 +39,27 @@ public class MinifigureServiceTest extends AbstractLegoServiceTest {
     @Test
     @Disabled("Loads to much data")
     public void testAll() throws IOException {
-        Assertions.assertNotNull(SERVICE.all());
+        assertThat(SERVICE.all()).isNotNull();
     }
 
     @Test
     public void testAllPage() throws IOException {
-        Assertions.assertNotNull(SERVICE.page(1, 1));
+        assertThat(SERVICE.page(1, 1)).isNotNull();
     }
 
     @Test
     public void testGet() throws IOException {
-        Assertions.assertNotNull(SERVICE.get("fig-000100"));
+        assertThat(SERVICE.get("fig-000100")).isNotNull();
     }
 
     @Test
     public void testParts() throws IOException {
-        Assertions.assertNotNull(SERVICE.parts("fig-000100"));
+        assertThat(SERVICE.parts("fig-000100")).isNotNull();
     }
 
     @Test
     public void testSets() throws IOException {
-        Assertions.assertNotNull(SERVICE.sets("fig-000100"));
+        assertThat(SERVICE.sets("fig-000100")).isNotNull();
     }
 
 }

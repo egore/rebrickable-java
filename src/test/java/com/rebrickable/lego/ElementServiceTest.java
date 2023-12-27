@@ -17,12 +17,12 @@
 package com.rebrickable.lego;
 
 import com.rebrickable.Rebrickable;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ElementServiceTest extends AbstractLegoServiceTest {
 
@@ -37,7 +37,7 @@ public class ElementServiceTest extends AbstractLegoServiceTest {
 
     @Test
     public void testGet() throws IOException {
-        Assertions.assertNotNull(SERVICE.get("4159052"));
+        assertThat(SERVICE.get("4159052")).isNotNull();
     }
 
 }

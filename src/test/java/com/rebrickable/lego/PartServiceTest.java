@@ -17,9 +17,13 @@
 package com.rebrickable.lego;
 
 import com.rebrickable.Rebrickable;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PartServiceTest extends AbstractLegoServiceTest {
 
@@ -35,35 +39,35 @@ public class PartServiceTest extends AbstractLegoServiceTest {
     @Test
     @Disabled("Loads to much data")
     public void testAll() throws IOException {
-        Assertions.assertNotNull(SERVICE.all());
+        assertThat(SERVICE.all()).isNotNull();
     }
 
     @Test
     public void testAllPage() throws IOException {
-        Assertions.assertNotNull(SERVICE.page(1, 1));
+        assertThat(SERVICE.page(1, 1)).isNotNull();
     }
 
     @Test
     public void testGet() throws IOException {
-        Assertions.assertNotNull(SERVICE.get("3069b"));
-        Assertions.assertNotNull(SERVICE.get("3069a"));
-        Assertions.assertNotNull(SERVICE.get("973c27h27"));
-        Assertions.assertNotNull(SERVICE.get("3004"));
+        assertThat(SERVICE.get("3069b")).isNotNull();
+        assertThat(SERVICE.get("3069a")).isNotNull();
+        assertThat(SERVICE.get("973c27h27")).isNotNull();
+        assertThat(SERVICE.get("3004")).isNotNull();
     }
 
     @Test
     public void testColors() throws IOException {
-        Assertions.assertNotNull(SERVICE.colors("973c27h27"));
+        assertThat(SERVICE.colors("973c27h27")).isNotNull();
     }
 
     @Test
     public void testColor() throws IOException {
-        Assertions.assertNotNull(SERVICE.color("973c27h27", 15));
+        assertThat(SERVICE.color("973c27h27", 15)).isNotNull();
     }
 
     @Test
     public void testColorSet() throws IOException {
-        Assertions.assertNotNull(SERVICE.colorSet("973c27h27", 15));
+        assertThat(SERVICE.colorSet("973c27h27", 15)).isNotNull();
     }
 
 }
