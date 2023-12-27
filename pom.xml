@@ -4,7 +4,7 @@
 
     <groupId>de.christophbrill.rebrickable</groupId>
     <artifactId>rebrickable</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0-SNAPSHOT</version>
 
     <name>rebrickable-java</name>
     <description>A Java wrapper for the rebrickable.com API</description>
@@ -22,7 +22,7 @@
         <url>https://github.com/egore/rebrickable-java</url>
         <connection>scm:git:https://github.com/egore/rebrickable-java.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/egore/rebrickable-java.git</developerConnection>
-      <tag>0.2.0</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <properties>
