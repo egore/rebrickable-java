@@ -19,6 +19,12 @@ package com.rebrickable.lego;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rebrickable.AbstractService;
 
+/**
+ * A wrapper service for all data independent of the user.
+ *
+ * The data provided and consumed by these services contains global information like colors, minifigures or sets.
+ * To manage parts, sets or similar owned by a user please refer to the {@link com.rebrickable.users.UsersService}.
+ */
 public class LegoService extends AbstractService {
 
     public LegoService(String apiKey, ObjectMapper mapper, String baseUrl) {

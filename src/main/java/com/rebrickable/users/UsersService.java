@@ -25,6 +25,12 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.Map;
 
+/**
+ * A wrapper service for all data related to a user.
+ *
+ * The data provided and consumed by these services is used to manage parts, sets or similar owned by a user. For
+ * global information please refer to the {@link com.rebrickable.lego.LegoService}.
+ */
 public class UsersService extends AbstractService  {
 
     private static final Logger LOG = LoggerFactory.getLogger(UsersService.class);

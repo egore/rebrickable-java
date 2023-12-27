@@ -42,6 +42,11 @@ public class ColorService extends AbstractService {
         return getPaged("/lego/colors/", ColorResponse.class, page, pageSize);
     }
 
+    /**
+     * Load a specific color by its ID.
+     * @param colorId the ID of the color (e.g. "-1" for unknown color, or "0" for black)
+     * @return the color found by the given ID
+     */
     public Color get(int colorId) throws IOException{
         return getSingle("/lego/colors/{id}/".replace("{id}", Integer.toString(colorId)), Color.class);
     }
