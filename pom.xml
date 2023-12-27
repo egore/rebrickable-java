@@ -12,6 +12,20 @@
     <description>A Java wrapper for the rebrickable.com API</description>
     <url>https://github.com/egore/rebrickable-java</url>
 
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/license/MIT/</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/egore/rebrickable-java</url>
+        <connection>scm:git:https://github.com/egore/rebrickable-java.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/egore/rebrickable-java.git</developerConnection>
+    </scm>
+
     <properties>
         <maven.compiler.release>11</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
