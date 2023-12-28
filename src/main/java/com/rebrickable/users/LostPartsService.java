@@ -18,6 +18,14 @@ public class LostPartsService extends AbstractUserService {
         return getAllInPages("/users/{user_token}/lost_parts/".replace("{user_token}", userToken), LostPartsResponse.class);
     }
 
+    /**
+     * @param page page to load (starts at 1)
+     * @param pageSize number of entries per page (pass 0 to use default)
+     */
+    public List<LostPart> page(int page, int pageSize) throws IOException {
+        return getPage("/users/{user_token}/lost_parts/".replace("{user_token}", userToken), LostPartsResponse.class, page, pageSize);
+    }
+
     public LostPart add(int partId, int quantity) throws IOException {
         return post("/users/{user_token}/lost_parts/".replace("{user_token}", userToken), LostPart.class, Map.of(
                 "lost_quantity", quantity,

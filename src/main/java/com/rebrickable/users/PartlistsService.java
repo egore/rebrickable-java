@@ -35,6 +35,10 @@ public class PartlistsService extends AbstractUserService {
         return getAllInPages("/users/{user_token}/partlists/".replace("{user_token}", userToken), PartlistsResponse.class);
     }
 
+    /**
+     * @param page page to load (starts at 1)
+     * @param pageSize number of entries per page (pass 0 to use default)
+     */
     public List<Partlist> page(int page, int pageSize) throws IOException {
         return getPage("/users/{user_token}/partlists/".replace("{user_token}", userToken), PartlistsResponse.class, page, pageSize);
     }

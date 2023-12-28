@@ -38,6 +38,10 @@ public class SetService extends AbstractService {
         return getAllInPages("/lego/sets/", SetResponse.class);
     }
 
+    /**
+     * @param page page to load (starts at 1)
+     * @param pageSize number of entries per page (pass 0 to use default)
+     */
     public List<Set> page(int page, int pageSize) throws IOException {
         return getPage("/lego/sets/", SetResponse.class, page, pageSize);
     }

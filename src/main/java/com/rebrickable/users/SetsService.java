@@ -17,7 +17,6 @@
 package com.rebrickable.users;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rebrickable.lego.model.Set;
 import com.rebrickable.users.model.SetElement;
 import com.rebrickable.users.responses.SetCreateResponse;
 import com.rebrickable.users.responses.SetUpdateResponse;
@@ -36,6 +35,14 @@ public class SetsService extends AbstractUserService {
 
     public List<SetElement> all() throws IOException {
         return getAllInPages("/users/{user_token}/sets/".replace("{user_token}", userToken), SetsResponse.class);
+    }
+
+    /**
+     * @param page page to load (starts at 1)
+     * @param pageSize number of entries per page (pass 0 to use default)
+     */
+    public List<SetElement> page(int page, int pageSize) throws IOException {
+        return getPage("/users/{user_token}/sets/".replace("{user_token}", userToken), SetsResponse.class, page, pageSize);
     }
 
     public SetCreateResponse create(SetElement set) throws IOException {

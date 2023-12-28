@@ -33,4 +33,12 @@ public class MinifigureService extends AbstractUserService {
         return getAllInPages("/users/{user_token}/minifigs/".replace("{user_token}", userToken), MinifigureResponse.class);
     }
 
+    /**
+     * @param page page to load (starts at 1)
+     * @param pageSize number of entries per page (pass 0 to use default)
+     */
+    public List<Minifigure> page(int page, int pageSize) throws IOException {
+        return getPage("/users/{user_token}/minifigs/".replace("{user_token}", userToken), MinifigureResponse.class, page, pageSize);
+    }
+
 }

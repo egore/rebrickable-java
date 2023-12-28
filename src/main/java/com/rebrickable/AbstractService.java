@@ -165,6 +165,10 @@ public abstract class AbstractService {
         return result.toString(StandardCharsets.UTF_8);
     }
 
+    /**
+     * @param page page to load (starts at 1)
+     * @param pageSize number of entries per page (pass 0 to use default)
+     */
     protected <T, U extends PagedResponse<T>> List<T> getPage(String url, Class<U> responseClass, int page, int pageSize) {
 
         // Postfix the URL with necessary page and page_size parametera

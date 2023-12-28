@@ -34,6 +34,10 @@ public class PartCategoryService extends AbstractService {
         return getAllInPages("/lego/part_categories/", PartCategoryResponse.class);
     }
 
+    /**
+     * @param page page to load (starts at 1)
+     * @param pageSize number of entries per page (pass 0 to use default)
+     */
     public List<PartCategory> page(int page, int pageSize) throws IOException {
         return getPage("/lego/part_categories/", PartCategoryResponse.class, page, pageSize);
     }
