@@ -14,11 +14,12 @@
  * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.rebrickable.users;
+package com.rebrickable.integration.users;
 
 import com.rebrickable.Rebrickable;
 import com.rebrickable.lego.SetService;
 import com.rebrickable.lego.model.SetPart;
+import com.rebrickable.users.LostPartsService;
 import com.rebrickable.users.model.LostPart;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -29,7 +30,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assumptions.assumeThat;
 
-public class LostPartsServiceTest extends AbstractUsersServiceTest {
+public class LostPartsServiceIT extends AbstractUsersServiceIT {
 
     private static SetService SET_SERVICE;
     private static LostPartsService SERVICE;

@@ -14,60 +14,31 @@
  * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.rebrickable.lego;
+package com.rebrickable.integration.lego;
 
 import com.rebrickable.Rebrickable;
+import com.rebrickable.lego.ElementService;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PartServiceTest extends AbstractLegoServiceTest {
+public class ElementServiceIT extends AbstractLegoServiceIT {
 
-    private static PartService SERVICE;
+    private static ElementService SERVICE;
 
     @BeforeAll
     public static void initService() {
         SERVICE = new Rebrickable(System.getenv("REBRICKABLE_API_KEY"))
                 .lego()
-                .part();
-    }
-
-    @Test
-    @Disabled("Loads to much data")
-    public void testAll() throws IOException {
-        assertThat(SERVICE.all()).isNotNull();
-    }
-
-    @Test
-    public void testAllPage() throws IOException {
-        assertThat(SERVICE.page(1, 1)).isNotNull();
+                .element();
     }
 
     @Test
     public void testGet() throws IOException {
-        assertThat(SERVICE.get("3069b")).isNotNull();
-        assertThat(SERVICE.get("3069a")).isNotNull();
-        assertThat(SERVICE.get("973c27h27")).isNotNull();
-        assertThat(SERVICE.get("3004")).isNotNull();
-    }
-
-    @Test
-    public void testColors() throws IOException {
-        assertThat(SERVICE.colors("973c27h27")).isNotNull();
-    }
-
-    @Test
-    public void testColor() throws IOException {
-        assertThat(SERVICE.color("973c27h27", 15)).isNotNull();
-    }
-
-    @Test
-    public void testColorSet() throws IOException {
-        assertThat(SERVICE.colorSet("973c27h27", 15)).isNotNull();
+        assertThat(SERVICE.get("4159052")).isNotNull();
     }
 
 }

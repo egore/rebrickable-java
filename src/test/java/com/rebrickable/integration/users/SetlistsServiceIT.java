@@ -14,13 +14,13 @@
  * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.rebrickable.users;
+package com.rebrickable.integration.users;
 
 import com.rebrickable.Rebrickable;
 import com.rebrickable.lego.exceptions.NotFoundException;
-import com.rebrickable.users.model.Partlist;
+import com.rebrickable.users.SetlistsService;
+import com.rebrickable.users.model.Setlist;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -29,81 +29,65 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class PartlistsServiceTest extends AbstractUsersServiceTest {
+public class SetlistsServiceIT extends AbstractUsersServiceIT {
 
-    private static PartlistsService SERVICE;
+    private static SetlistsService SERVICE;
 
     @BeforeAll
     public static void initService() throws IOException {
         SERVICE = new Rebrickable(System.getenv("REBRICKABLE_API_KEY"))
                 .users(System.getenv("REBRICKABLE_USERNAME"), System.getenv("REBRICKABLE_PASSWORD"))
-                .partlists();
-    }
-
-    @Test
-    public void testAll() throws IOException {
-        assertThat(SERVICE.all()).isNotNull();
-    }
-
-    @Test
-    public void testGet() throws IOException {
-        assertThat(SERVICE.get(SERVICE.page(1, 1).iterator().next().id)).isNotNull();
-    }
-
-    @Test
-    @Disabled("Seems to hit HTTP 502 every time")
-    public void testParts() throws IOException {
-        assertThat(SERVICE.parts(SERVICE.page(1, 1).iterator().next().id)).isNotNull();
+                .setlists();
     }
 
     @Test
     public void testCRUD() throws IOException {
-        // given: A parts list
-        var partslist = new Partlist();
-        partslist.name = UUID.randomUUID().toString();
-        partslist.buildable = true;
-        partslist.numParts = 5;
+        // given: A sets list
+        var setlist = new Setlist();
+        setlist.name = UUID.randomUUID().toString();
+        setlist.buildable = true;
+        setlist.numSets = 5;
 
-        // when: the part is created
-        Partlist created = SERVICE.create(partslist);
+        // when: the sets list is created
+        Setlist created = SERVICE.create(setlist);
 
-        // then: it now has an ID, and all fields match the given part
+        // then: it now has an ID, and all fields match the given sets list
         assertThat(created.id).isNotEqualTo(0);
-        assertThat(created.name).isEqualTo(partslist.name);
-        assertThat(created.buildable).isEqualTo(partslist.buildable);
-        assertThat(created.numParts).isEqualTo(partslist.numParts);
+        assertThat(created.name).isEqualTo(setlist.name);
+        assertThat(created.buildable).isEqualTo(setlist.buildable);
+        assertThat(created.numSets).isEqualTo(setlist.numSets);
 
-        // when: the partslist is retrieved
-        Partlist check = SERVICE.get(created.id);
+        // when: the sets list is retrieved
+        Setlist check = SERVICE.get(created.id);
 
         // then: the created object could be retrieved
         assertThat(check.id).isEqualTo(created.id);
         assertThat(check.name).isEqualTo(created.name);
         assertThat(check.buildable).isEqualTo(created.buildable);
-        assertThat(check.numParts).isEqualTo(created.numParts);
+        assertThat(check.numSets).isEqualTo(created.numSets);
 
-        // when: the part numParts is increased by one
-        created.numParts++;
-        Partlist updated = SERVICE.update(created);
+        // when: the sets list numSets is increased by one
+        created.numSets++;
+        Setlist updated = SERVICE.update(created);
 
-        // then: it now has an ID, and all fields match the given part
+        // then: it now has an ID, and all fields match the given sets list
         assertThat(updated.id).isEqualTo(created.id);
         assertThat(updated.name).isEqualTo(created.name);
         assertThat(updated.buildable).isEqualTo(created.buildable);
-        assertThat(updated.numParts).isEqualTo(created.numParts);
+        assertThat(updated.numSets).isEqualTo(created.numSets);
 
-        // when: the partslist is retrieved
+        // when: the sets list is retrieved
         check = SERVICE.get(created.id);
 
         // then: the updated object could be retrieved
         assertThat(check.id).isEqualTo(updated.id);
         assertThat(check.name).isEqualTo(updated.name);
         assertThat(check.buildable).isEqualTo(updated.buildable);
-        assertThat(check.numParts).isEqualTo(updated.numParts);
+        assertThat(check.numSets).isEqualTo(updated.numSets);
 
         SERVICE.delete(created.id);
 
-        // when: the partslist is gone
+        // when: the sets list is gone
         assertThatThrownBy(() -> SERVICE.get(created.id)).isInstanceOf(NotFoundException.class);
     }
 

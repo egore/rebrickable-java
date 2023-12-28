@@ -1,11 +1,11 @@
-package com.rebrickable.users;
+package com.rebrickable.integration.users;
 
-import com.rebrickable.lego.AbstractLegoServiceTest;
+import com.rebrickable.integration.lego.AbstractLegoServiceIT;
 import org.junit.jupiter.api.BeforeAll;
 
 import static org.assertj.core.api.Assumptions.assumeThat;
 
-public class AbstractUsersServiceTest extends AbstractLegoServiceTest {
+public class AbstractUsersServiceIT extends AbstractLegoServiceIT {
 
     @BeforeAll
     public static void checkEnvironmentForUser() {

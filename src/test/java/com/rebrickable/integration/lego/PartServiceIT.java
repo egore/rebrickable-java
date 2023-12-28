@@ -14,9 +14,10 @@
  * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.rebrickable.lego;
+package com.rebrickable.integration.lego;
 
 import com.rebrickable.Rebrickable;
+import com.rebrickable.lego.PartService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -25,15 +26,15 @@ import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MinifigureServiceTest extends AbstractLegoServiceTest {
+public class PartServiceIT extends AbstractLegoServiceIT {
 
-    private static MinifigureService SERVICE;
+    private static PartService SERVICE;
 
     @BeforeAll
     public static void initService() {
         SERVICE = new Rebrickable(System.getenv("REBRICKABLE_API_KEY"))
                 .lego()
-                .minifigure();
+                .part();
     }
 
     @Test
@@ -49,17 +50,25 @@ public class MinifigureServiceTest extends AbstractLegoServiceTest {
 
     @Test
     public void testGet() throws IOException {
-        assertThat(SERVICE.get("fig-000100")).isNotNull();
+        assertThat(SERVICE.get("3069b")).isNotNull();
+        assertThat(SERVICE.get("3069a")).isNotNull();
+        assertThat(SERVICE.get("973c27h27")).isNotNull();
+        assertThat(SERVICE.get("3004")).isNotNull();
     }
 
     @Test
-    public void testParts() throws IOException {
-        assertThat(SERVICE.parts("fig-000100")).isNotNull();
+    public void testColors() throws IOException {
+        assertThat(SERVICE.colors("973c27h27")).isNotNull();
     }
 
     @Test
-    public void testSets() throws IOException {
-        assertThat(SERVICE.sets("fig-000100")).isNotNull();
+    public void testColor() throws IOException {
+        assertThat(SERVICE.color("973c27h27", 15)).isNotNull();
+    }
+
+    @Test
+    public void testColorSet() throws IOException {
+        assertThat(SERVICE.colorSet("973c27h27", 15)).isNotNull();
     }
 
 }

@@ -14,30 +14,29 @@
  * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.rebrickable.lego;
+package com.rebrickable.integration.lego;
 
 import com.rebrickable.Rebrickable;
+import com.rebrickable.lego.PartCategoryService;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SetServiceTest extends AbstractLegoServiceTest {
+public class PartCategoryServiceIT extends AbstractLegoServiceIT {
 
-    private static SetService SERVICE;
+    private static PartCategoryService SERVICE;
 
     @BeforeAll
     public static void initService() {
         SERVICE = new Rebrickable(System.getenv("REBRICKABLE_API_KEY"))
                 .lego()
-                .set();
+                .partCategory();
     }
 
     @Test
-    @Disabled("Loads to much data")
     public void testAll() throws IOException {
         assertThat(SERVICE.all()).isNotNull();
     }
@@ -49,27 +48,7 @@ public class SetServiceTest extends AbstractLegoServiceTest {
 
     @Test
     public void testGet() throws IOException {
-        assertThat(SERVICE.get("71236")).isNotNull();
-    }
-
-    @Test
-    public void testAlternates() throws IOException {
-        assertThat(SERVICE.alternates("9476-1")).isNotNull();
-    }
-
-    @Test
-    public void testMinifigures() throws IOException {
-        assertThat(SERVICE.minifigures("9476")).isNotNull();
-    }
-
-    @Test
-    public void testParts() throws IOException {
-        assertThat(SERVICE.parts("9476")).isNotNull();
-    }
-
-    @Test
-    public void testSets() throws IOException {
-        assertThat(SERVICE.sets("9476")).isNotNull();
+        assertThat(SERVICE.get(65)).isNotNull();
     }
 
 }

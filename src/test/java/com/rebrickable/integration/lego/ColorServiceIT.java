@@ -14,9 +14,10 @@
  * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.rebrickable.lego;
+package com.rebrickable.integration.lego;
 
 import com.rebrickable.Rebrickable;
+import com.rebrickable.lego.ColorService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -24,15 +25,15 @@ import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ThemeServiceTest extends AbstractLegoServiceTest {
+public class ColorServiceIT extends AbstractLegoServiceIT {
 
-    private static ThemeService SERVICE;
+    private static ColorService SERVICE;
 
     @BeforeAll
     public static void initService() {
         SERVICE = new Rebrickable(System.getenv("REBRICKABLE_API_KEY"))
                 .lego()
-                .theme();
+                .color();
     }
 
     @Test
@@ -47,7 +48,7 @@ public class ThemeServiceTest extends AbstractLegoServiceTest {
 
     @Test
     public void testGet() throws IOException {
-        assertThat(SERVICE.get(604)).isNotNull();
+        assertThat(SERVICE.get(1)).isNotNull();
     }
 
 }

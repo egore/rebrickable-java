@@ -14,9 +14,10 @@
  * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.rebrickable.users;
+package com.rebrickable.integration.users;
 
 import com.rebrickable.Rebrickable;
+import com.rebrickable.users.MinifigureService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +25,7 @@ import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MinifigureServiceTest extends AbstractUsersServiceTest {
+public class MinifigureServiceIT extends AbstractUsersServiceIT {
 
     private static MinifigureService SERVICE;
 
