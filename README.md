@@ -19,17 +19,24 @@ and will provide necessary API wrappers.
 
 ## Status
 
-This project covers all of the "lego" API, but only minimal parts of the "users" API. Adding the
+This project covers all of the "lego" API, but not all parts of the "users" API. Adding the
 missing part is not complex, but currently beyond my personal need. Feel free to implement it and
 send a merge request.
 
-Basic error handling of HTTP status codes 4xx is implemented in `AbstractService` class. Additional
-work is needed when adding POST/DELETE requests of the "users" API.
+Basic error handling of HTTP status codes 4xx is implemented in `AbstractService` class (see `mapError`
+method). Additional work is needed when adding POST/DELETE requests of the "users" API to map status
+codes to more specific exception types.
 
 ## Development
 
-The main work is done by the methods of `AbstractService`. These are used to either load single
-objects (`getSingle`) or list of objects in pages (`getPaged`).
+The communication with the API is done by the methods of `AbstractService`. This class offers
+HTTP functionality matching the API. There are two main methods for loading data: either to load
+single a object (`getSingle`) or list of objects (`getAllInPages` respectively `getPage` for a
+single page).
+
+Additionally this offers methods to modify data. The API only allows modifying user-owned data
+(like sets owned by the user). The main methods are used to create (POST), update (PATCH),
+replace (PUT) or remove (DELETE) data.
 
 ### Loading single objects
 
@@ -51,8 +58,49 @@ be used for paging through the list. Therefore all paging requests internally wo
 - Check if the a next page exits, load the objects and add them to the return value
 - Continue until no further page exists
 
-An alternative is to specifcy the `page` and `pageSize` parameters to only load parts of the
-dataset.
+An alternative is to call `page()` instead of `all()` which allows specifying the `page` and `pageSize`
+parameters to only load parts of the dataset.
+
+### Creating, updating and deleting data
+
+Methods modifying data need an additional *user token*, which can be obtained using username
+and password. The handling of this is done in the `UsersService`, which will perform a login
+upon instantiation (see `login()`. All services retrieved from the `UsersService` will use the token
+automatically.
+
+The methods all work in the same schema and are therefore implemented in `AbstractService#upload()`:
+
+- Set up a HTTP request with the necessary `Authorization` header and `user token` in the path
+- Convert the data provided to the expected format (it is usually a stripped down version of the
+  provided method parameter)
+- Send the data as `application/x-www-form-urlencoded` content to the server
+- Parse the returned JSON (if any) into a Java object and return it
+
+## Testing
+
+The project offers two main ways to test the code. The first ones are unit tests using a mocked
+API, the second ones are integration tests which rely on the actual API.
+
+Both are written using JUnit 5 for test execution, and AssertJ for the assertions.
+
+### Unit tests
+
+To run the unit tests using the maven-surefire-plugin invoke `mvn test`. The will start up a
+wiremock server and set up the requests and responses in the method. The responses are stripped
+down versions of the official API.
+
+### Integration tests
+
+To run the integration tests using the maven-failsafe-plugin invoke `mvn verify`. This will
+call the official API so you need to provide a correct API key. If you also want to test the
+user-content methods you also need to provide a username and a password. This is done using
+the following environment variables.
+
+- REBRICKABLE_API_KEY
+- REBRICKABLE_USERNAME
+- REBRICKABLE_PASSWORD
+
+If these are not provided, the integration tests will skip execution.
 
 ## License
 
