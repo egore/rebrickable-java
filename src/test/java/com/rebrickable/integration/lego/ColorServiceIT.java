@@ -18,10 +18,14 @@ package com.rebrickable.integration.lego;
 
 import com.rebrickable.Rebrickable;
 import com.rebrickable.lego.ColorService;
+import com.rebrickable.lego.model.Color;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -43,7 +47,10 @@ public class ColorServiceIT extends AbstractLegoServiceIT {
 
     @Test
     public void testAllPage() throws IOException {
-        assertThat(SERVICE.page(1, 1)).isNotNull();
+        List<Color> colors = SERVICE.all(1, 1);
+        Assertions.assertNotNull(colors);
+        Assertions.assertEquals(1, colors.size());
+        System.err.println(colors.get(0).name);
     }
 
     @Test
